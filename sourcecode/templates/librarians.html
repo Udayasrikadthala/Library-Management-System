@@ -1,0 +1,71 @@
+{% include 'ahead.html' %}
+<div class="row form-page p-5 ">
+    <div class="col-1"></div>
+    <div class="col-4">
+      <div class="card form-control mt-20 p-10">
+        <form action="librarians_action" method="post">
+          <div class="text-center h4">Librarians</div>
+          <div>
+            <label class="form-label h6"  for="name">Name</label>
+            <input type="text" name="name" id="name" class="p-10 form-control" placeholder="enter name" required>
+          </div>
+          <div>
+            <label class="form-label h6"  for="phone">Phone</label>
+            <input type="number" name="phone" id="phone"  class="p-10 form-control" placeholder="enter phone" required>
+          </div>
+          <div>
+            <label class="form-label h6" for="email">Email</label>
+            <input type="email" name="email" id="email" class="p-10 form-control" placeholder="enter email" required>
+          </div>
+          <div>
+            <label class="form-label h6" for="password">Password</label>
+            <input type="password" name="password" id="password" class="p-10 form-control" placeholder="enter password" required>
+          </div>
+          <div>
+            <label  class="form-label h6" for="address">Address</label>
+            <textarea name="address" id="address" class="p-10 form-control" placeholder="enter address" required></textarea>
+          </div>
+          <div>
+              <label class="form-label h6">Locations</label>
+              <select name="location_id" class="p-10 form-control" required>
+                <option value="">choose locations</option>
+                {% for location in locations %}
+                <option value="{{location[0]}}">{{location[1]}}</option>
+                {% endfor %}
+              </select>
+          </div>
+          <div>
+            <input type="submit" class="h6 p-5 form-control mt-10" value="Add Locations">
+          </div>
+        </form>
+          {{message}}
+      </div>
+    </div>
+    <div class="col-1"></div>
+    <div class="col-5">
+        <table class="w-100 mt-20">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody>
+              {% for librarian in librarians %}
+              {% set location=get_location_by_location_id(librarian[6]) %}
+                   <tr>
+                       <td>{{librarian[1]}}</td>
+                       <td>{{librarian[2]}}</td>
+                       <td>{{librarian[3]}}</td>
+                       <td>{{librarian[5]}}</td>
+                       <td>{{location[1]}}</td>
+                   </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="col-1"></div>
+</div>

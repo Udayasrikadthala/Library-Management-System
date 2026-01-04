@@ -1,0 +1,39 @@
+{% if session['role'] == 'librarian' %}
+   {% include 'lhead.html' %}
+{% endif %}
+{% if session['role'] == 'student' %}
+   {% include 'shead.html' %}
+{% endif %}
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+        <div class="card mt-10 p-20">
+             <form action="return_book_action" method="post">
+                 <div>Fine ${{fine}}</div>
+                 <div>
+                     <input type="hidden" name="borrowing_id" value="{{borrowing_id}}">
+                     <input type="hidden" name="status" value="{{status}}">
+                     <input type="hidden" name="fine" value="{{fine}}">
+                 </div>
+                 <div>
+                     <label  class="form-label h6" for="card number">Card Number</label>
+                     <input type="number" name="card number" id="card number" class="p-5 form-control" placeholder="enter card number" required>
+                 </div>
+                 <div>
+                     <label  class="form-label h6"  for="name on card">Name On Card</label>
+                     <input type="text" name="name on card" id="name on card"   class="p-5 form-control"  placeholder="enter card name" required>
+                 </div><div>
+                     <label   class="form-label h6" for="cvv">CVV</label>
+                     <input type="number" name="cvv" id="cvv"  class="p-5 form-control" required>
+                 </div><div>
+                     <label   class="form-label h6" for="expiry date">Expiry Date</label>
+                     <input type="month" name="expiry date" id="expiry date"  class="p-5 form-control" required>
+                 </div>
+                 <div class="mt-10">
+                     <input type="submit"   class="p-5 form-control" value="payment">
+                 </div>
+             </form>
+        </div>
+    </div>
+    <div class="col-4"></div>
+</div>

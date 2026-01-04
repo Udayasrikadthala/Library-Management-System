@@ -1,0 +1,25 @@
+{% include 'ahead.html' %}
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;   /* full screen height */
+        width: 100vw;    /* full screen width */
+
+        background-image: url('{{ url_for("static", filename="download.png") }}');
+        background-size: cover;        /* makes image fill the whole screen */
+        background-position: center;   /* centers the image */
+        background-repeat: no-repeat;  /* prevents repeating */
+    }
+
+    h1 {
+        text-align: center;
+        padding-top: 40px;
+        color: white;
+        font-size: 40px;
+        text-shadow: 2px 2px 5px black; /* makes text visible on background */
+    }
+</style>
+
+<h1>Welcome to Admin Home</h1>

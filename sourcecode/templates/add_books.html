@@ -1,0 +1,50 @@
+{% if  session['role'] == 'admin' %}
+  {% include 'ahead.html' %}
+{% endif %}
+{% if session['role'] == 'librarian' %}
+   {% include 'lhead.html' %}
+{% endif %}
+
+<div class="row  form-page p-5">
+    <div class="col-4"></div>
+    <div class="col-4">
+        <div class="card mt-20  form-control p-20">
+            <form action="add_books_action" method="post" enctype="multipart/form-data">
+                <div class="text-center h4">Add books</div>
+                <div class="mt-5">
+                    <label for="book_title" class="form-label h6">Book title</label>
+                    <input type="text" name="book_title" id="book_title" class="p-10 form-control" placeholder="enter book title" required>
+                </div>
+                <div class="mt-5">
+                    <label for="author" class="form-label h6">Author</label>
+                    <input type="text" name="author" id="author" class="p-10 form-control" placeholder="enter author name" required>
+                </div>
+                <div class="mt-5">
+                    <label for="year" class="form-label h6">Year</label>
+                    <input type="date" name="year" id="year"  class="p-10 form-control" placeholder=" enter year" required>
+                </div>
+                <div class="mt-5">
+                    <label for="description" class="form-label h6">Description</label>
+                    <textarea name="description" id="description" class="p-10 form-control" placeholder=" enter description" required></textarea>
+                </div>
+                <div class="mt-5">
+                    <label for="picture" class="form-label h6">Picture</label>
+                    <input type="file" name="picture" id="picture"  class="p-10 form-control" required>
+                </div>
+                <div class="mt-5">
+                    <label class="form-label h6">Book categories</label>
+                    <select name="book_category_id" required class="form-label h6">
+                        <option value="">Choose Book Categories</option>
+                        {% for book_category in book_categories %}
+                            <option value="{{book_category[0]}}">{{book_category[1]}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <input type="submit" value="Add Books" class="btn btn-secondary" required>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-4"></div>
+</div>

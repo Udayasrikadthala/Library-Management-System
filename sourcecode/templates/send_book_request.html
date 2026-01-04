@@ -1,0 +1,23 @@
+  {% include 'shead.html' %}
+
+<div class="m-20">
+        {% for librarian_book in librarian_books %}
+            {% set librarian = get_librarian_by_librarian_id(librarian_book[0]) %}
+            {% set available_books = get_available_books_by_book_id(book_id, librarian[0]) %}
+          <div class="card p-10">
+              <div class="row">
+                  <div class="col-4">
+                      {{librarian[1]}}
+                  </div>
+                  <div class="col-4"> Available Books: {{int(int(librarian_book[1]) - int(available_books) )}}</div>
+                  <div class="col-4">
+                      <form action="send_request_action">
+                          <input type="hidden" name="book_id" value="{{book_id}}">
+                          <input type="hidden" name="librarian_id" value="{{librarian[0]}}">
+                          <input type="submit" value="send book request">
+                      </form>
+                  </div>
+              </div>
+          </div>
+        {% endfor %}
+</div>

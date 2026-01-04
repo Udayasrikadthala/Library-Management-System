@@ -1,0 +1,41 @@
+{% include 'ahead.html' %}
+<div class="row form-page p-5">
+        <div class="col-2"></div>
+        <div class="col-3 mt-20">
+            <div class="card form-control p-10">
+                <form action="location_action" method="post">
+                    <div class="text-center h4">Locations</div>
+                    <div>
+                        <label  class="form-label h6" for="location_name">Location Name</label>
+                        <input type="text" name="location_name" id="location_name" class="p-10 form-control" placeholder="enter location name" required>
+                    </div>
+                    <br>
+                    <div>
+                        <input type="submit" class="h6 btn btn-secondary" value="Add location">
+                    </div>
+                </form>
+                {{message}}
+            </div>
+        </div>
+        <div class="col-2"></div>
+        <div class="col-2">
+            <div class="h6 mt-20">View Locations</div>
+            <div class="card p-5">
+                <ol class="ol">
+                    {% for location in locations %}
+                      <li>{{location[1]}}</li>
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+        <div class="col-1"></div>
+</div>
+
+
+
+
+<!--            <ul>-->
+<!--                {% for location in locations %}-->
+<!--                 <li>{{location[1]}}</li>-->
+<!--                {% endfor %}-->
+<!--            </ul>-->

@@ -1,0 +1,32 @@
+{% if session['role'] == 'librarian' %}
+   {% include 'lhead.html' %}
+{% endif %}
+{% if session['role'] == 'student' %}
+   {% include 'shead.html' %}
+{% endif %}
+<div class="m-20">
+    <div class="row">
+        {% for  book_copy in  book_copies %}
+            <div class="col-2">
+                <div class="card m-10 p-5">
+                    <div class="row">
+                        <div class="col-6">
+                            <div>{{book_copy[1]}}</div>
+                        </div>
+                        <div class="col-6">
+                            {% if book_copy[4]=='Available' %}
+                                <form action="/assign_book_action" method="post">
+                                    <input type="hidden" name="book_copy_id" value="{{book_copy[0]}}">
+                                    <input type="hidden" name="borrowing_id" value="{{borrowing_id }}">
+                                    <input type="submit" value="Assign"  class="btn  p-5 btn-danger">
+                                </form>
+                            {% else %}
+                                <div class="">Assigned</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

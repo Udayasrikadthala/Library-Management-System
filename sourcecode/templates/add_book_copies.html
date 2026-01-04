@@ -1,0 +1,44 @@
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    function get_book_copies(){
+        let number_of_copies = $("#number_of_copies").val();
+        let count = $("#count").val();
+        let book_name = $("#book_name").val().toUpperCase();
+        number_of_copies = parseInt(number_of_copies)
+        count = parseInt(count)
+        let copies_html=`<div class="row">`
+        for(let i=1; i<=number_of_copies; i++){
+            console.log(i)
+                let book_copy_name = "book_copy_number"+i
+                copies_html = copies_html+
+                    `<div class="col-3 p-10">
+                        <label>${i}) Book Copy Number</label>
+                        <input type="text" name="${book_copy_name}" readonly class="form-control p-10" value="${book_name+count+i}">
+                    </div>`
+                }
+            copies_html = copies_html+`</div>`
+            console.log(copies_html)
+            $("#book_copy_number").html(copies_html);
+    }
+
+</script>
+{% include 'lhead.html' %}
+<form action="add_book_copies_action">
+    <div class="mt-20">
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <input type="hidden" name="count" id="count"  value="{{count}}">
+                <input type="hidden" name="book_name" id="book_name" value="{{str(book[0])+book[1][:4]}}">
+                <input type="hidden" name="book_id" id="book_id"  value="{{book_id}}">
+                <label>Number of Copies</label>
+                <input type="number" name="number_of_copies" id="number_of_copies" class="form-control p-10" onkeyup="get_book_copies()">
+            </div>
+            <div class="col-4 p-10">
+                <input type="submit" value="Add Book Copies" class="mt-20 btn btn-secondary">
+            </div>
+        </div>
+        <div id="book_copy_number"></div>
+    </div>
+</form>

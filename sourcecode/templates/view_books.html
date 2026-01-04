@@ -1,0 +1,68 @@
+{% if  session['role'] == 'admin' %}
+  {% include 'ahead.html' %}
+{% endif %}
+{% if session['role'] == 'librarian' %}
+   {% include 'lhead.html' %}
+{% endif %}
+{% if session['role'] == 'student' %}
+   {% include 'shead.html' %}
+{% endif %}
+<div class="mt-20">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+             <form action="view_books">
+                 <div class="row">
+                     <div class="col-8">
+                        <input type="search" name="keyword" id="keyword"  class="p-10 form-control" placeholder="search book">
+                     </div>&nbsp;
+                     <div class="col-4">
+                         <input type="submit" value="Search" class="btn btn-secondary ">
+                     </div>
+                 </div>
+             </form>
+        </div>
+        <div class="col-4"></div>
+
+    </div>
+    <div class="row">
+        {% for book in books %}
+        {% set book_category=get_book_category_by_book_category_id(book[6]) %}
+        <div class="col-2">
+            <div class="card m-20">
+                <div class="book-img-container">
+                    <img src="../static/books/{{book[5]}}" class="book-image p-10 w-100 ">
+                    {% if session['role']=='librarian' %}
+                        <div class="book-img-container-mask"></div>
+                        <div class="book-btn">
+                            <div class="row">
+                                <div class="col-6">
+                                    <a href="add_book_copies?book_id={{book[0]}}" class="btn btn-card">Add Copies</a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="view_book_copies?book_id={{book[0]}}" class="btn btn-card text-end">Copies</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if session['role']=='student' %}
+                      {% set is_borrowed = is_borrowed_by_book_id(book[0]) %}
+                      {% if is_borrowed %}
+                          <div>you can't send renewal</div>
+                      {% else %}
+                        <a href="send_book_request?book_id={{book[0]}}">send request</a>
+                      {% endif %}
+                    {% endif %}
+                </div>
+                <div>
+                    <div class="p-10 h6">{{book[1]}}</div>
+                    <div class="p-5">{{book[2]}}</div>
+                    <div class="p-5">{{book[3]}}</div>
+                    <div class="p-5">{{book[4]}}</div>
+                    <div class="p-5">{{book_category[1]}}</div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
