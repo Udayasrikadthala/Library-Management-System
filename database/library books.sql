@@ -9,7 +9,7 @@ create table admin(
 	password varchar(255) not null
 );
 
-insert into admin(username,password) values('admin', 'admin');
+insert into admin(username,password) values('', '');
 
 create table location(
 	location_id int auto_increment primary key,
